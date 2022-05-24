@@ -1,0 +1,32 @@
+﻿@model IEnumerable<StudentCourse>
+@{
+	ViewData["Title"] = "Index";
+}
+<h2>Here is the list of Student Courses</h2>
+
+<table style="width:80%" class="table table-info">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Degree</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (StudentCourse s in Model)
+		{
+			<tr>
+				<td>@s.course.Name</td>
+				@if (@s.Degree == null)
+				{
+					<td><input type="number" name="degree" /></td>
+				}
+				else
+				{
+					<td>@s.Degree</td>
+
+				}
+			</tr>
+		}
+	</tbody>
+</table>

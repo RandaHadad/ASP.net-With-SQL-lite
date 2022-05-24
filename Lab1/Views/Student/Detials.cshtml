@@ -1,0 +1,23 @@
+﻿@model Student
+@{
+    ViewData["Title"] = "Update";
+}
+<a asp-action="Index">View All Students</a>
+<h2>Update</h2>
+    <p>
+        <label asp-for="Id">Your Id:</label>
+        <label asp-for="Id">@Model.Id</label>
+      
+    </p>
+    <p>
+        <label asp-for="Name">Your Name:</label>
+         <label asp-for="Name">@Model.Name</label>
+    </p>
+     <p>
+        <label asp-for="Email">Your Email:</label>
+       <label asp-for="Email">@Model.Email</label>
+    </p>
+    @* <p>
+        <label asp-for="Password">Your Password:</label>
+        <label asp-for="Password" />
+    </p>*@

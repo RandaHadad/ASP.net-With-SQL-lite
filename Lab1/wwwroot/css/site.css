@@ -1,0 +1,46 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.container a {
+    font-family: 'Adobe Arabic';
+    font-size: 25px;
+}
+  
+form p label {
+    width: 10%;
+}
+  
+form p input[type="text"], form p input[type="number"], form p select {
+    width: 20%;
+}
+  
+form p span {
+    width: 20%;
+    color: Red;
+}
+  
+form p .input-validation-error {
+    border: 1px solid Red;
+    background-color: #fee;
+}
+  
+table td, table th {
+    padding: 10px;
+    font-size:14pt;
+}

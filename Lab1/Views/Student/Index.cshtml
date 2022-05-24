@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Student>
+@{
+	ViewData["Title"] = "Index";
+}
+
+<a asp-action="Create">Create an Students</a>
+
+@*<form asp-action="Index" method="post">
+	<input type="text" name="serchedname" class="h-100 m-1" />
+	<button type="submit" class="btn btn-outline-info h-100 m-1">Search</button>
+	</form>*@
+
+<form asp-action="Index" method="post" class="input-group">
+	<div class="input-group mb-2 mt-2">
+		<input type="text" class="form-control rounded" placeholder="Search" name="serchedname" aria-label="Search" aria-describedby="search-addon" />
+		<button type="submit" class="btn btn-outline-primary">search</button>
+	</div>
+</form>
+<h2>Here is the list of Students</h2>
+<table style="width:80%" class="table table-striped table-light">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Dept</th>
+			<th>Service</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Student s in Model)
+		{
+			<tr>
+				<td>@s.Name</td>
+				<td>@s.Email</td>
+				<td>@s.department.Name</td>
+
+				<td>
+					<a class="btn btn-outline-info btn-xs"   asp-action="Courses" asp-route-id="@s.Id">Courses</a>
+					<a class="btn btn-outline-info btn-xs"   asp-action="Detials" asp-route-id="@s.Id">Detials</a>
+					<a class="btn btn-outline-info btn-xs"   asp-action="Update"  asp-route-id="@s.Id">Update</a>
+					<a class="btn btn-outline-danger btn-xs" asp-action="Delete"  asp-route-id="@s.Id">Delete</a>
+				</td>
+
+			</tr>
+		}
+	</tbody>
+</table>

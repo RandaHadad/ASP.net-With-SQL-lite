@@ -1,0 +1,44 @@
+﻿@model Student
+@{
+    ViewData["Title"] = "Update";
+}
+<a asp-action="Index">View All Students</a>
+<h2>Update</h2>
+<form method="post">
+    <p>
+        <label asp-for="Id">Your Id:</label>
+        <input asp-for="Id" disabled />
+        <span asp-validation-for="Id"></span>
+    </p>
+    <p>
+        <label asp-for="Name">Your Name:</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </p>
+    	<p>
+		<label asp-for="DeptNo">Your DeptNo:</label>
+		<select asp-items="@ViewBag.depts" asp-for="DeptNo"></select>
+		<span asp-validation-for="DeptNo"></span>
+	</p>
+     <p>
+        <label asp-for="Email">Your Email:</label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </p>
+     <p>
+        <label asp-for="Password">Your Password:</label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </p>
+    <p>
+		<label asp-for="CPassword">Confirm Password:</label>
+		<input asp-for="CPassword" />
+		<span asp-validation-for="CPassword"></span>
+	</p>
+
+    <p><button type="submit" class="btn btn-success">Submit</button></p>
+</form>
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js" ></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" ></script>
+}
