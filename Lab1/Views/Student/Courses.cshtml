@@ -4,29 +4,40 @@
 }
 <h2>Here is the list of Student Courses</h2>
 
-<table style="width:80%" class="table table-info">
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Degree</th>
-
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (StudentCourse s in Model)
-		{
+<form method="post">
+	<table style="width:80%" class="table table-info">
+		<thead>
 			<tr>
-				<td>@s.course.Name</td>
-				@if (@s.Degree == null)
-				{
-					<td><input type="number" name="degree" /></td>
-				}
-				else
-				{
-					<td>@s.Degree</td>
 
-				}
+				<th>Name</th>
+				<th>Degree</th>
 			</tr>
-		}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			@foreach (StudentCourse s in Model)
+			{
+				<tr>
+
+					<td>@s.course.Name</td>
+					@if (@s.Degree == null)
+					{
+						<td>
+							<input type="number" name="degree" />
+							<input type="hidden" value="@s.CourseId" name="cid" />
+						</td>
+					}
+					else
+					{
+						<td>@s.Degree</td>
+
+					}
+				</tr>
+			}
+
+			<input type="hidden" value="@Model.First().StdId" name="stdid" />
+
+		</tbody>
+	</table>
+
+	<p><button type="submit" class="btn btn-success">Submit</button></p>
+</form>

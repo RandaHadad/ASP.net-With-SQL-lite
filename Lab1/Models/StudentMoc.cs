@@ -6,36 +6,41 @@ namespace Lab1.Models
     public interface IStudent
     {
         public IEnumerable<Student> AllStudents();
-        public  void Create(Student student);
-        public  void Update(Student newstudent);
-        public  void Delete(Student student);
+        public void Create(Student student);
+        public void Update(Student newstudent);
+        public void Delete(Student student);
+        public void addStudentDegree(int id, int[] degree, int[] courseID);
+
     }
-    public class StudentMoc:IStudent
+    public class StudentMoc : IStudent
     {
-        private  List<Student> allStudents = new List<Student>();
-        public  IEnumerable<Student> AllStudents()
+        private List<Student> allStudents = new List<Student>();
+        public IEnumerable<Student> AllStudents()
         {
-             return allStudents; 
+            return allStudents;
         }
-        public  void Create(Student student)
+        public void Create(Student student)
         {
             allStudents.Add(student);
         }
-        public  void Update(Student newstudent)
+        public void Update(Student newstudent)
         {
             Student oldstudent = allStudents.FirstOrDefault(a => a.Id == newstudent.Id);
-        
+
             oldstudent.Name = newstudent.Name;
             oldstudent.Email = newstudent.Email;
             oldstudent.Password = newstudent.Password;
             oldstudent.CPassword = newstudent.Password;
         }
-        public  void Delete(Student student)
+        public void Delete(Student student)
         {
             allStudents.Remove(student);
         }
 
-     
+        public void addStudentDegree(int id, int[] degree, int[] courseID)
+        {
+            throw new NotImplementedException();
+        }
     }
     public class StudentDB : IStudent
     {
@@ -44,20 +49,32 @@ namespace Lab1.Models
         {
             db = _db;
         }
+
+        public void addStudentDegree(int id, int[] degree, int[] courseID)
+        {
+            Student std = AllStudents().FirstOrDefault(a => a.Id == id);
+            for (int i = 0 ; i < degree.Length; i++)
+            {
+               
+                std.studentCourses.FirstOrDefault(a => a.CourseId == courseID[i]).Degree = degree[i];
+            }
+            db.SaveChanges();
+        }
+
         public IEnumerable<Student> AllStudents()
         {
-            return db.Students.Include(a=>a.department).ThenInclude(d=>d.Courses).Include(b=>b.studentCourses).ThenInclude(c=>c.course).ToList();
+            return db.Students.Include(a => a.department).ThenInclude(d => d.Courses).Include(b => b.studentCourses).ThenInclude(c => c.course).ToList();
         }
 
         public void Create(Student student)
         {
             Department dept = db.Departments.Include(a => a.Courses).FirstOrDefault(b => b.Id == student.DeptNo);
-            foreach(var i in dept.Courses)
+            foreach (var i in dept.Courses)
             {
                 student.studentCourses.Add(new StudentCourse()
                 {
                     CourseId = i.id,
-                    StdId=student.Id
+                    StdId = student.Id
                 });
             }
             db.Add(student);

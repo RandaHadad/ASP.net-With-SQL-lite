@@ -101,7 +101,7 @@ namespace Lab1.Controllers
         [HttpPost]
         public IActionResult Update(Student student)
         {
-            if (ModelState.IsValid || student.Id!= null)
+            if (ModelState.IsValid)
             {
                 db.Update(student);
                 return RedirectToAction("Index");
@@ -115,8 +115,14 @@ namespace Lab1.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult Courses(int stdid ,int[] degree, int[] cid) { 
+           
+                db.addStudentDegree(stdid, degree, cid);
+                return RedirectToAction("Index");
+            
+        }
 
 
-      
     }
 }
